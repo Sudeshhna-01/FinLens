@@ -1,0 +1,177 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                    String            @id @default(cuid())
+  email                 String            @unique
+  name                  String
+  password              String
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+  expenses              Expense[]
+  groupMembers          GroupMember[]
+  createdGroups         Group[]           @relation("GroupCreator")
+  stockPortfolio        StockHolding[]
+  transactions          Transaction[]
+  settlementsFrom       GroupSettlement[] @relation("SettlementFrom")
+  settlementsTo         GroupSettlement[] @relation("SettlementTo")
+  settlementsAsRecorder GroupSettlement[] @relation("SettlementRecordedBy")
+}
+
+model Expense {
+  id            String         @id @default(cuid())
+  userId        String
+  amount        Float
+  description   String
+  category      String
+  date          DateTime       @default(now())
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tags          ExpenseTag[]
+  groupExpenses GroupExpense[]
+}
+
+model ExpenseTag {
+  id        String   @id @default(cuid())
+  expenseId String
+  tag       String
+  createdAt DateTime @default(now())
+  expense   Expense  @relation(fields: [expenseId], references: [id], onDelete: Cascade)
+
+  @@unique([expenseId, tag])
+}
+
+model Group {
+  id            String            @id @default(cuid())
+  name          String
+  description   String?
+  creatorId     String
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  creator       User              @relation("GroupCreator", fields: [creatorId], references: [id])
+  groupExpenses GroupExpense[]
+  members       GroupMember[]
+  settlements   GroupSettlement[]
+}
+
+model GroupMember {
+  id        String              @id @default(cuid())
+  groupId   String
+  userId    String?
+  guestName String?
+  joinedAt  DateTime            @default(now())
+  group     Group               @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user      User?               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  splits    GroupExpenseSplit[]
+
+  @@index([groupId])
+  @@index([userId])
+}
+
+model GroupExpense {
+  id          String              @id @default(cuid())
+  groupId     String
+  expenseId   String
+  paidBy      String
+  amount      Float
+  description String
+  category    String
+  date        DateTime            @default(now())
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+  expense     Expense             @relation(fields: [expenseId], references: [id], onDelete: Cascade)
+  group       Group               @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  splits      GroupExpenseSplit[]
+}
+
+model GroupExpenseSplit {
+  id             String       @id @default(cuid())
+  groupExpenseId String
+  groupMemberId  String
+  amount         Float
+  isPaid         Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  groupExpense   GroupExpense @relation(fields: [groupExpenseId], references: [id], onDelete: Cascade)
+  groupMember    GroupMember  @relation(fields: [groupMemberId], references: [id], onDelete: Cascade)
+
+  @@unique([groupExpenseId, groupMemberId])
+}
+
+model GroupSettlement {
+  id            String   @id @default(cuid())
+  groupId       String
+  fromUserId    String
+  toUserId      String
+  amount        Float
+  settledBy     String
+  settledAt     DateTime @default(now())
+  group         Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  fromUser      User     @relation("SettlementFrom", fields: [fromUserId], references: [id])
+  toUser        User     @relation("SettlementTo", fields: [toUserId], references: [id])
+  settledByUser User     @relation("SettlementRecordedBy", fields: [settledBy], references: [id])
+}
+
+model StockHolding {
+  id           String   @id @default(cuid())
+  userId       String
+  stockId      String
+  quantity     Float
+  avgPrice     Float
+  currentPrice Float?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stock        Stock    @relation(fields: [stockId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, stockId])
+}
+
+model Stock {
+  id           String   @id @default(cuid())
+  symbol       String   @unique
+  name         String
+  currentPrice Float?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  stockHoldings StockHolding[]
+  transactions  Transaction[]
+}
+
+model Transaction {
+  id        String   @id @default(cuid())
+  userId    String
+  stockId   String
+  type      String // 'buy' or 'sell'
+  quantity  Float
+  price     Float
+  date      DateTime @default(now())
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stock Stock @relation(fields: [stockId], references: [id], onDelete: Cascade)
+
+  @@index([userId, date])
+  @@index([stockId])
+}
+
+model MLInsight {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String
+  data        String
+  generatedAt DateTime @default(now())
+  validUntil  DateTime
+
+  @@index([userId, type])
+}

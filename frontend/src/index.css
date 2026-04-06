@@ -1,0 +1,7 @@
+/* FinLens Design System - Main Stylesheet */
+/* Import design system modules */
+@import './styles/variables.css';
+@import './styles/base.css';
+@import './styles/components.css';
+@import './styles/utilities.css';
+@import './styles/animations.css';

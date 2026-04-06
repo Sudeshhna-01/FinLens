@@ -1,0 +1,109 @@
+/* FinLens Design System - CSS Variables */
+
+:root {
+  /* Primary Palette */
+  --primary-50: #f0f4ff;
+  --primary-100: #e0e9ff;
+  --primary-500: #6366f1;
+  --primary-600: #4f46e5;
+  --primary-700: #4338ca;
+
+  /* Accent Palette */
+  --accent-500: #8b5cf6;
+  --accent-600: #7c3aed;
+
+  /* Neutral Grays */
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-400: #94a3b8;
+  --gray-600: #475569;
+  --gray-900: #0f172a;
+
+  /* Semantic Colors */
+  --success-50: #d1fae5;
+  --success-500: #10b981;
+  --warning-50: #fef3c7;
+  --warning-500: #f59e0b;
+  --danger-50: #fee2e2;
+  --danger-500: #ef4444;
+
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 
+                 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 
+                 'Droid Sans', 'Helvetica Neue', sans-serif;
+  
+  --text-4xl: 2.25rem;  /* 36px */
+  --text-3xl: 1.875rem; /* 30px */
+  --text-2xl: 1.5rem;   /* 24px */
+  --text-xl: 1.25rem;   /* 20px */
+  --text-lg: 1.125rem;  /* 18px */
+  --text-base: 1rem;    /* 16px */
+  --text-sm: 0.875rem;  /* 14px */
+  --text-xs: 0.75rem;   /* 12px */
+
+  --font-light: 300;
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+
+  /* Spacing System (8px base) */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.25rem;  /* 20px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-10: 2.5rem;  /* 40px */
+  --space-12: 3rem;    /* 48px */
+  --space-16: 4rem;    /* 64px */
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+
+  /* Animation Timing */
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+
+  /* Legacy Variables (for backward compatibility) */
+  --primary: var(--primary-500);
+  --primary-dark: var(--primary-600);
+  --secondary: var(--accent-500);
+  --success: var(--success-500);
+  --danger: var(--danger-500);
+  --warning: var(--warning-500);
+  --bg: var(--gray-50);
+  --card-bg: #ffffff;
+  --text: var(--gray-900);
+  --text-light: var(--gray-600);
+  --border: var(--gray-200);
+  --shadow: rgba(0, 0, 0, 0.1);
+  --shadow-lg: rgba(0, 0, 0, 0.15);
+}
