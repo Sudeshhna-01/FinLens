@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useAuth } from '../context/AuthContext';
-import './Navbar.css';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const router = useRouter();
   const [theme, setTheme] = useState('light');
 
   useEffect(() => {
@@ -24,48 +23,48 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    router.push('/login');
   };
 
   if (!user) return null;
 
-  const isActive = (path) => location.pathname === path;
+  const isActive = (path) => router.pathname === path;
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-brand">
+        <Link href="/" className="navbar-brand">
           <span className="brand-icon">💰</span>
           <span className="brand-text">FinLens</span>
         </Link>
         
         <div className="navbar-menu">
           <Link
-            to="/"
+            href="/"
             className={`navbar-link ${isActive('/') ? 'active' : ''}`}
           >
             Dashboard
           </Link>
           <Link
-            to="/expenses"
+            href="/expenses"
             className={`navbar-link ${isActive('/expenses') ? 'active' : ''}`}
           >
             Expenses
           </Link>
           <Link
-            to="/groups"
+            href="/groups"
             className={`navbar-link ${isActive('/groups') ? 'active' : ''}`}
           >
             Groups
           </Link>
           <Link
-            to="/portfolio"
+            href="/portfolio"
             className={`navbar-link ${isActive('/portfolio') ? 'active' : ''}`}
           >
             Portfolio
           </Link>
           <Link
-            to="/insights"
+            href="/insights"
             className={`navbar-link ${isActive('/insights') ? 'active' : ''}`}
           >
             Insights

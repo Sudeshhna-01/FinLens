@@ -11,7 +11,9 @@ export const useAuth = () => {
   return context;
 };
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  'http://localhost:5001/api';
 
 /** Map axios errors to a user-visible string */
 function getAuthErrorMessage(error, fallback) {

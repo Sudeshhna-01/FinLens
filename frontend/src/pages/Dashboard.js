@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 import Navbar from '../components/Navbar';
-import './Dashboard.css';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  'http://localhost:5001/api';
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
@@ -151,22 +153,22 @@ const Dashboard = () => {
             <div className="card">
               <h2 className="card-title">Quick Actions</h2>
               <div className="quick-actions">
-                <a href="/expenses" className="action-btn">
+                <Link href="/expenses" className="action-btn">
                   <span className="action-icon">➕</span>
                   <span>Add Expense</span>
-                </a>
-                <a href="/groups" className="action-btn">
+                </Link>
+                <Link href="/groups" className="action-btn">
                   <span className="action-icon">👥</span>
                   <span>Create Group</span>
-                </a>
-                <a href="/portfolio" className="action-btn">
+                </Link>
+                <Link href="/portfolio" className="action-btn">
                   <span className="action-icon">📈</span>
                   <span>View Portfolio</span>
-                </a>
-                <a href="/insights" className="action-btn">
+                </Link>
+                <Link href="/insights" className="action-btn">
                   <span className="action-icon">💡</span>
                   <span>View Insights</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
