@@ -12,11 +12,6 @@
   ],
   "rootMainFiles": [],
   "pages": {
-    "/": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/index.js"
-    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -27,11 +22,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/expenses": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/expenses.js"
-    ],
     "/groups": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -41,11 +31,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/insights.js"
-    ],
-    "/portfolio": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/portfolio.js"
     ]
   },
   "ampFirstPages": []

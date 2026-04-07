@@ -38,3 +38,5 @@ ENV/
 
 # Prisma
 backend/prisma/migrations/
+
+*/.next/
